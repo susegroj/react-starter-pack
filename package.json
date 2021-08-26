@@ -2,7 +2,7 @@
   "name": "starter-pack",
   "version": "1.0.0",
   "license": "MIT",
-  "description": "A complete ReactJs architecture to start over a project. Includes some webpack configurations, react routes managed by React Router Dom, Scss with some mixins, Stylelinter, and JS linter following the best practices. It also includes i180n react library to handle all the labels in English or Spanish. It includes two custom hooks, one for handle all the app data using localStorage and the other for manage React context hook. Includes PWA & Netlify configurations",
+  "description": "A complete ReactJs architecture to start fast a project without many configurations.",
   "keywords": [
     "react",
     "reactjs",
