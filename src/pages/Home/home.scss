@@ -1,0 +1,30 @@
+@import '@styles/mixins';
+
+.main-home {
+  @include flex(column, wrap, center, center, center);
+  gap: 2rem;
+
+  h2 {
+    align-self: flex-start;    
+  }
+
+  .inputs,
+  .links,
+  .loaders {
+    @include flex(row, wrap,center, center);
+    border-top: 1px solid rgba(var(--black));
+    gap: 1rem;
+    padding: 1rem 0;
+    width: 100%;
+
+    p {
+      align-self: flex-start;
+      width: 100%;
+    }
+  }
+
+  .inputs {
+    border-style: none;
+    padding: 0 0 1rem;
+  }
+}

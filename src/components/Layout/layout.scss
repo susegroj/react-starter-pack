@@ -1,0 +1,18 @@
+
+.layout {
+  display: grid;
+  grid-template-areas: 
+    'header'
+    'page'
+    'footer';
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr min-content;
+
+  min-height: 100%;
+  width: 100%;
+  
+  .main-content {
+    grid-area: page;
+    padding: 1rem;
+  }
+}

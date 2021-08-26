@@ -1,0 +1,88 @@
+@import './mixins';
+
+@include keyframe(fade-in) {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@include keyframe(fade-out) {
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@include keyframe(slide-in-right) {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@include keyframe(slide-out-right) {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@include keyframe(slide-in-left) {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@include keyframe(slide-out-left) {
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@include keyframe(hover) {
+  to {
+    transform: scale(1.02);
+  }
+}
+
+@include keyframe(like) {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@include keyframe(dots) {
+  0%,
+  100% {
+    content: ' ',;
+    opacity: 0;
+  }
+
+  25% {
+    content: '.';
+    opacity: 0.5;
+  }
+
+  50% {
+    content: '..';
+    opacity: 1;
+  }
+
+  75% {
+    content: '...';
+  }
+}
+
+@include keyframe(spin) {
+  to {
+    transform: rotate(1turn);
+  }
+}

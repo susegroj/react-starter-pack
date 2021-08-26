@@ -1,0 +1,131 @@
+
+/*
+  **=== FLEX BOX container mixing ===**
+  @param {$direction}: Direction of container
+  @param {$wrap}: Wrap or not the elements
+  @param {$justify}: Justify the content
+  @param {$items}: Align the items
+  @param {$content}: Align the content
+*/
+@mixin flex($direction, $wrap, $justify:flex-start, $items:flex-start, $content: flex-start ) {
+  align-content: $content;
+  align-items: $items;
+  display: flex;
+  flex-flow: #{$direction} #{$wrap};
+  justify-content: $justify;
+}
+
+/*
+  **=== KEYFRAME mixing ===**
+  @param {$animation_name}: The name of animation to execute
+*/
+@mixin keyframe ($animation_name) {
+  @keyframes #{$animation_name} {
+    @content;
+  }
+}
+
+/*
+  **=== ANIMATION mixing ===**
+  @param {$name}: The name of the animation 'fade-in'
+  @param {$time}: The time of the animation '1s'
+  @param {$mode}: The effect of the animation 'ease'
+  @param {$loop}: The times of the animation 'infinite'
+  @param {$delay}: The delay of the animation '0s'forwards
+  @param {$fillmode}: The fillmode of the animation 'infinite'
+*/
+@mixin animation ($name, $time, $mode: ease, $loop: 1,$delay:0s, $fillmode: forwards) {
+  animation: #{$name} #{$time} #{$mode};
+  animation-delay: $delay;
+  animation-fill-mode: $fillmode;
+  animation-iteration-count: $loop;
+}
+
+/*
+  **=== IMAGE mixing ===**
+  @param {$width}: The width of image '100px'
+  @param {$height}: The height of image '100px'
+  @param {$circle}: For border-radius, if circle is true will be a circle
+  @param {$width}: How the image will fit in figure
+*/
+@mixin image($width, $height:auto, $circle:false, $fit:cover) {
+  height: $height;
+  overflow: hidden;
+  width: $width;
+
+  @if $circle == true {
+    border-radius: 50%;
+  } @else {
+    border-radius: $circle;
+  }
+
+  img {
+    height: 100%;
+    object-fit: $fit;
+    width: 100%;
+  }
+}
+
+/*
+  **=== MEDIA QUERY mixing ===**
+  @param {$device}: mobile-first or desktop-first
+  
+  Ei:
+  @include media(desktop-first, size.$mobile) {
+    .main-footer {
+      background:red;
+    }
+  }
+*/
+@mixin media($device, $breakpoint) {
+  /* changes applied when increase the screen size */
+  @if $device == mobile-first {
+    @media screen and(min-width: $breakpoint) {
+      @content;
+    }
+  } 
+  /* changes applied when reduces the screen size */
+  @if $device == desktop-first {
+    @media screen and(max-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+/*
+  **=== HOVER disabled on mobile mixing ===**
+  Ei:
+  @include hover {
+    .main-footer {
+      background:red;
+    }
+  }
+*/
+@mixin hover {
+  /* hover only applies on desktop */
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      @content;
+    }
+  }
+}
+
+/*
+  **=== Loader Spinner mixing ===**
+  @param {$width}: The width of loader '100px'
+  @param {$border}: The border size '4px'
+  @param {$font}: The font size of the label '#1rem'
+  @param {$height}: The height of loader '100px'
+*/
+@mixin loader-size($width,$border,$font: 1rem,$height:$width) {
+  .loader-spin {
+    border-width: $border;
+    border-top-width: $border;
+    height: $height;
+    width: $width;
+  }
+
+  .loader-label {  
+    font-size: $font;
+  }
+}

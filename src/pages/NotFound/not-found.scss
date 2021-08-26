@@ -1,0 +1,15 @@
+@import '@styles/mixins';
+
+.not-found {
+  
+  @include flex(column, wrap, center, center, center);
+  @include animation(fade-in, 0.5s, ease,1,0s,backwards);
+  gap: 2rem;
+  height: 100vh;
+
+  figure {
+    @include image(50vw,auto,true,contain);
+    max-width: 600px;
+    min-width: 300px;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "extends": "stylelint-config-sass-guidelines",
+  "rules": {
+    "max-nesting-depth": [
+      4,
+      {
+        "ignore": ["pseudo-classes", "blockless-at-rules"]
+      }
+    ],
+    "selector-max-compound-selectors": 6,
+    "selector-max-id": 2,
+    "value-no-vendor-prefix": [
+      true,
+      {
+        "ignoreValues": ["box", "webkit"]
+      }
+    ],
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": ["box-orient"]
+      }
+    ],
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": ["attribute"]
+      }
+    ]
+  }
+}

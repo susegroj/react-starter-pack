@@ -1,0 +1,41 @@
+@use '@styles/breakpoints' as size;
+@import '@styles/mixins';
+
+.main-footer {
+  
+  @include flex(column, wrap);
+  background: rgba(var(--black));
+  color: var(--white);
+  gap: 1rem;
+  grid-area: footer;
+  
+  padding: 2rem;
+  
+
+  .icons-wrapper {
+    @include flex(row, wrap, center, center);
+    gap: 1rem;
+
+    .icon {
+      font-size: 1rem;
+    }
+  }
+
+  .devs {
+    @include flex(row,wrap,flex-start,center,center);
+    gap: 0.2rem;
+    padding: 0.2rem 0;
+
+    .icon {
+      font-size: 0.8rem;
+    }
+    
+    small,
+    a,
+    p {
+      color: var(--white);
+      font-size: 0.6rem;
+      text-decoration: none;
+    }
+  }
+}

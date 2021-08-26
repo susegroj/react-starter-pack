@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "React Starter Pack",
+    "facebook": "#",
+    "whatsapp": "1111111111",
+    "instagram": "#",
+    "phone": "1111111111",
+    "mail": "susegroj@gmail.com",
+    "address": "#",
+    "devs": {
+      "name": "Powered by Red Minds | Contact us",
+      "mail": "susegroj@gmail.com",
+      "website": "https://github.com/susegroj"
+    }
+  },
+  "tabs": {
+    "home": "Home",
+    "notFound": "Oops! There's nothing here"
+  },
+  "commons": {
+    "goBackHome": "Go Home"
+  }
+}

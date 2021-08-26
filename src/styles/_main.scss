@@ -1,0 +1,119 @@
+@use './colors';
+@use './fonts';
+@use './animations';
+@import './mixins';
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  /*remove blue highlight*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  min-height: 100%;
+}
+
+/* Reset btn styles */
+[type='button'],
+[type='submit'],
+[role='button'] {
+  border-style: none;
+  outline: none;;
+}
+
+/* Remove red outline color */
+select,
+textarea,
+input,
+[contentEditable='true'] {
+  border-radius: 0.5rem;
+  border-style: none;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+
+  &:focus-visible {
+    outline-color: var(--blue);
+  }
+}
+
+h1 {
+  font-size: min(max(16px, 4vw), 30px);
+  font-weight: bold;
+}
+
+input {
+  border: 1px solid rgba(var(--black), 0.4);
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+a {
+  color: var(--black);
+  text-decoration: none;
+  @include hover {
+    @include animation(hover,0.2s); }
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+.input-wrapper {
+  @include flex(row,wrap, flex-start, center);
+
+  border: 1px solid rgba(var(--black), 0.4);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  width: max-content;
+
+  &:focus-within {
+    border-color: transparent;
+    box-shadow: 0 0 0 2px var(--blue);    
+  }
+  
+  input {
+    border-style: none;
+    height: 100%;
+    padding-left: 0;
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+}
+
+.link-btn {
+  background: rgba(var(--black));
+  border-radius: 0.5rem;
+  color: var(--white);
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  
+  @include hover {
+    @include animation(hover, 0.2s);
+    background: var(--white);
+    border: 1px solid rgba(var(--black));
+    color: rgba(var(--black));
+  }
+  
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.2;
+}
+

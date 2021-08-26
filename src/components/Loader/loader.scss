@@ -1,0 +1,45 @@
+@import '@styles/mixins';
+
+.loader {
+  @include flex(column, wrap,center, center, center);
+  margin: -0.3rem;
+  row-gap: 1rem;
+  
+  .loader-spin {
+    @include animation(spin, 1s, linear, infinite);
+
+    border: 10px solid rgba(var(--black), 0.1);
+    border-radius: 50%;
+    border-top: 10px solid rgba(var(--black), 1);   
+  }
+
+  &.xl {   
+    @include loader-size(120px, 10px);
+  }
+
+  &.l {
+    @include loader-size(80px, 8px,0.8rem);
+  }
+
+  &.m {
+    @include loader-size(50px, 5px,0.7rem);
+  }
+
+  &.s {
+    @include loader-size(25px, 3px,0.6rem);
+  }
+
+
+
+  &-label {
+    position: relative;
+
+    &::after {
+      @include animation(dots,2s,ease-in-out,infinite);
+      content: '';
+      left: 100%;
+      position: absolute;
+      top: 0;
+    }
+  }
+}
