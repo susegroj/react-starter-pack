@@ -12,9 +12,7 @@
   </a>
 </p>
 
-### 🏠 [Homepage](https://github.com/susegroj/react-starter-pack#readme)
-
- A complete ReactJs architecture to start a project fast. 
+A complete ReactJs architecture to start fast a project without many configurations. 
 
 ***FORK this repo and MODIFY all what you need to create your own application***
 
