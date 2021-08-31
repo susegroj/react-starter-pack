@@ -117,3 +117,35 @@ a {
   opacity: 0.2;
 }
 
+.skeleton {
+  @include animation(skeleton, 1s, linear, infinite);
+  animation-direction: alternate;
+  opacity: 0.9;
+}
+
+
+.text-wrapper {
+  @include flex(column, nowrap);
+  gap: 0.2rem;
+  padding: 0.5rem 0;
+  width: 100%;
+}
+
+.skeleton-text {
+  animation-direction: alternate;
+  border-radius: 1rem;
+  height: 0.5rem;
+
+  width: 100%;
+
+  
+  &:last-of-type {
+    align-self: flex-start;
+    width: 80%;
+  }
+
+  &:only-child {
+    width: 100%;
+  }
+}
+
