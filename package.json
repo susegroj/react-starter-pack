@@ -1,6 +1,6 @@
 {
   "name": "@susegroj/react-starter-pack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "description": "A complete ReactJs architecture to start fast a project without many configurations.",
   "keywords": [
