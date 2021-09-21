@@ -36,7 +36,7 @@
     "format": "prettier --write '{*.js, src/**/*.{js,jsx}}'",
     "lint-style": "npx stylelint '**/*.scss'",
     "lint": "eslint src/ --fix",
-    "postinstall": "husky install"
+    "postinstall": "npx husky install"
   },
   "dependencies": {
     "i18next": "^20.3.0",
