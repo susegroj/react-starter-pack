@@ -1,5 +1,5 @@
 {
-  "name": "starter-pack",
+  "name": "@susegroj/react-starter-pack",
   "version": "1.0.0",
   "license": "MIT",
   "description": "A complete ReactJs architecture to start fast a project without many configurations.",
@@ -19,6 +19,7 @@
   ],
   "homepage": "https://github.com/susegroj/react-starter-pack#readme",
   "main": "src/index.js",
+  "bin": "/.bin/cli.js",
   "funding": {
     "type": "individual",
     "url": "https://www.buymeacoffee.com/susegroj"
@@ -28,6 +29,9 @@
     "url": "https://github.com/susegroj/react-starter-pack"
   },
   "author": "Jorge Macías Morales <@susegroj> (https://github.com/susegroj)",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "webpack serve --config webpack.config.dev.js",
@@ -35,7 +39,7 @@
     "format": "prettier --write '{*.js, src/**/*.{js,jsx}}'",
     "lint-style": "npx stylelint '**/*.scss'",
     "lint": "eslint src/ --fix",
-    "postinstall": "husky install"
+    "postinstall": "npx husky install"
   },
   "dependencies": {
     "i18next": "^20.3.0",
@@ -56,6 +60,7 @@
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@babel/runtime": "7.13.8",
+    "@svgr/webpack": "^5.5.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
@@ -87,6 +92,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
   }
 }
