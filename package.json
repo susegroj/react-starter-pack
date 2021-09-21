@@ -19,7 +19,7 @@
   ],
   "homepage": "https://github.com/susegroj/react-starter-pack#readme",
   "main": "src/index.js",
-  "bin": "/.bin/cli.js",
+  "bin": "/bin/cli.js",
   "funding": {
     "type": "individual",
     "url": "https://www.buymeacoffee.com/susegroj"
@@ -29,9 +29,6 @@
     "url": "https://github.com/susegroj/react-starter-pack"
   },
   "author": "Jorge Macías Morales <@susegroj> (https://github.com/susegroj)",
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "webpack serve --config webpack.config.dev.js",
@@ -39,7 +36,7 @@
     "format": "prettier --write '{*.js, src/**/*.{js,jsx}}'",
     "lint-style": "npx stylelint '**/*.scss'",
     "lint": "eslint src/ --fix",
-    "postinstall": "npx husky install"
+    "postinstall": "husky install"
   },
   "dependencies": {
     "i18next": "^20.3.0",
