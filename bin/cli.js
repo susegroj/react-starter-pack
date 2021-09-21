@@ -15,7 +15,7 @@ const runCommand = (command) => {
 };
 
 const repoName = process.args[2];
-const gitCommand = `git clone --depth 1 git@github.com:susegroj/react-starter-pack.git ${repoName}`;
+const gitCommand = `git clone --depth 1 https://github.com/susegroj/react-starter-pack ${repoName}`;
 
 const installDepsCommand = `cd ${repoName} && yarn install`;
 
