@@ -59,7 +59,7 @@
 ## Install
 
 ```sh
-<%= installCommand %>
+yarn install
 ```
 <% } -%>
 <% if (usage) { -%>
@@ -67,7 +67,7 @@
 ## Usage
 
 ```sh
-<%= usage %>
+yarn development
 ```
 <% } -%>
 <% if (testCommand) { -%>
@@ -104,29 +104,40 @@
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](<%= issuesUrl %>). <%= contributingUrl ? `You can also take a look at the [contributing guide](${contributingUrl}).` : '' %>
 <% } -%>
 
-## Show your support
+## React-starter-pack template Author 
 
-Give a ⭐️ if this project helped you!
-<% if (authorPatreonUsername) { -%>
+<div style="display: flex;
+  flex-direction: column;">
+<section style=" align-items: center;
+  display: flex;">
+<img src="https://pbs.twimg.com/profile_images/1369193856193896455/ci1iOBnV_400x400.jpg" width=50 height=50 style="border-radius: 50%;
+  margin: 1rem;" />
 
-<a href="https://www.patreon.com/<%= authorPatreonUsername %>">
-  <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-</a>
-<% } -%>
-<% if (licenseName && licenseUrl) { -%>
+  💻 **Jorge Macías Morales [@susegroj](https://github.com/susegroj)**   
+</section>
 
+* Website: <https://github.com/susegroj>
+* Twitter: [@susegroj](https://twitter.com/susegroj)
+* Github: [@susegroj](https://github.com/susegroj)
+* LinkedIn: [@jorgemaciasmorales](https://linkedin.com/in/jorgemaciasmorales)
 
-## Show your support to @susegroj react-starter-pack
-
-Do you find it useful? Please show your support 👇🏼   <br/>
+<section>
+If you find it useful, please show your support 👇🏼   <br/>
 <a href="https://www.buymeacoffee.com/susegroj" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="box-shadow: 0 3px 2px 0 rgba(190, 190, 190, 0.5) !important;
   box-shadow: 0 3px 2px 0 rgba(190, 190, 190, 0.5) !important;
   height: 41px !important;
   margin: 16px 0 !important;
   width: 174px !important;" ></a> <br/>
 
-Give a ⭐️ or ♥️ if [this template](https://github.com/susegroj/react-starter-pack) helped you!  
-Thanks to readme-md-generator for this README.
+Also you can share o give ⭐⭐ 
+</section>
+</div>
+
+Special thanks to [readme-md-generator](https://github.com/kefranabg/readme-md-generator)
+
+
+<% if (licenseName && licenseUrl) { -%>
+
 
 ## 📝 License
 

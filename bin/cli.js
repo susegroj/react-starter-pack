@@ -41,7 +41,7 @@ const runCommand = (command) => {
   return true;
 };
 
-const changeAppNames = async () => {
+const changeAppNames =  () => {
 
   console.log(`\n 🗂 Preparing the files...`);
 
@@ -58,6 +58,12 @@ const changeAppNames = async () => {
   packJson.description = PROJECT_DESCRIPTION;
   packJson.version = '0.0.1';
   packJson.repository = {};
+  packJson.author = {};
+  packJson.homepage = '';
+  packJson.contributors = [
+    { "name":"Jorge Macías Morales","email":"jor_ge_711@hotmail.com","url":"https://github.com/susegroj" },
+  ];
+  delete packJson.bin;
 
   fs.writeFileSync(PACKAGE_JSON, JSON.stringify(packJson), 'utf-8');  
 
@@ -86,12 +92,12 @@ const changeAppNames = async () => {
   console.log(`\n 🗂 Files prepared 🎉`);
 };
 
-const cloneRepository = async () => {
+const cloneRepository =  () => {
   const gitCommand = `git clone --depth 1 git@github.com:susegroj/react-starter-pack.git ${PROJECT_NAME}`;
 
-    console.log(`\n ⌛️ Cloning the repository ${PROJECT_NAME}...`);
+    console.log(`\n ⌛️ Cloning the repository ${PROJECT_NAME}...\n`);
 
-    const checkedOut = await runCommand(gitCommand);
+    const checkedOut =  runCommand(gitCommand);
 
     if (!checkedOut) {
       console.log('\n ❌ Failed to clone the repository 🥺 \n');
@@ -102,13 +108,13 @@ const cloneRepository = async () => {
     return true;
 };
 
-const createReadme = async () => {
+const createReadme =  () => {
 
-  console.log(`\n 📝 Creating README...`);
+  console.log(`\n 📝 Settings things to create README...\n`);
 
-  const createReadMeCommand = `cd ${PROJECT_NAME} && rm README.md && npx readme-md-generator -p ${PROJECT_NAME}/bin/template.md -y`;
+  const createReadMeCommand = `cd ${PROJECT_NAME} && rm README.md && npx readme-md-generator -p bin/template.md`;
 
-  const createdReadMe = await runCommand(createReadMeCommand);
+  const createdReadMe =  runCommand(createReadMeCommand);
 
   if(!createdReadMe) {
     console.log('\n ❌ Failed to create README.md 🥺 \n');
@@ -117,11 +123,11 @@ const createReadme = async () => {
   return true;
 };
 
-const installDependencies = async () => {
-  console.log(`\n 🚧 Installing dependencies...`);
+const installDependencies =  () => {
+  console.log(`\n 🚧 Installing dependencies...\n`);
 
   const installDependenciesCommand = `cd ${PROJECT_NAME} && yarn install`;
-  const installDeps = await runCommand(installDependenciesCommand);
+  const installDeps =  runCommand(installDependenciesCommand);
 
   if (!installDeps) {
     console.log('\n ❌ Failed to install dependencies 🥺');
@@ -130,6 +136,19 @@ const installDependencies = async () => {
 
   console.log(`\n ✅ Successfully cloned and installed ${PROJECT_NAME} 🤓`);
 
+};
+
+const removeBinFolder = () => {
+  console.log(`\n 🗂 Preparing last details...\n`);
+
+  const removeCommand = `cd ${PROJECT_NAME} && rm -rf bin/`;
+  const removed = runCommand(removeCommand);
+
+  if (!removed) {
+    console.log('\n ❌ Failed to set last details 🥺 \n');
+    process.exit(-1);
+  }
+  return true;
 };
 
 const showEndMessage = () => process.stdout.write(boxen(END_MSG, BOXEN_CONFIG));
@@ -143,17 +162,18 @@ const initializeProject = () => {
       }
       PROJECT_NAME = projectName;
 
-      rl.question(`-> 📝 Project description (default: ${PROJECT_DESCRIPTION}): `, async (projectDescription = PROJECT_DESCRIPTION) => {
+      rl.question(`-> 📝 Project description (default: ${PROJECT_DESCRIPTION}): `,  (projectDescription = PROJECT_DESCRIPTION) => {
         PROJECT_DESCRIPTION = projectDescription || PROJECT_DESCRIPTION;
 
-        rl.question(`-> 📝 App name (default: ${PROJECT_NAME}): `, async (appName = PROJECT_NAME) => {
+        rl.question(`-> 📝 App name (default: ${PROJECT_NAME}): `,  (appName = PROJECT_NAME) => {
           APP_NAME = appName || PROJECT_NAME;
           
-            await cloneRepository();
-            await changeAppNames();
-            await createReadme();
-            await installDependencies();
-            await showEndMessage();
+            cloneRepository();
+            changeAppNames();
+            createReadme();
+            installDependencies();
+            removeBinFolder();
+            showEndMessage();
     
             process.exit(0);
         });
