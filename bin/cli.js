@@ -1,45 +1,190 @@
-#! usr/bin/env node
+#!/usr/bin/env node
+/* eslint-disable import/no-extraneous-dependencies */
+
+const readline = require("readline");
+const fs = require('fs');
+const boxen = require('boxen');
 
 const { execSync } = require('child_process');
 
+let PROJECT_NAME = '';
+let PROJECT_DESCRIPTION = 'My awesome React App';
+let APP_NAME = '';
+
+const END_MSG = `Your project was successfully generated. 🎉
+Thanks for using REACT-STARTER-PACK`;
+
+const BOXEN_CONFIG = {
+  padding: 2,
+  margin: { top: 2, bottom: 3 },
+  borderColor: 'yellow',
+  align: 'center', 
+  borderStyle: 'round',
+  title: 'REACT-STARTER-PACK by "@susegroj"',
+  titleAlignment: 'center',
+};
+
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 const runCommand = (command) => {
   try {
-    execSync(command, { stdio: 'inherit' });
+    execSync(`${command}`, { stdio: 'inherit' });
   } catch (error) {
-    console.error(`Failed to executed ${command}`,  error);
+    console.error(`Failed to executed '${command}'`,  error);
     return false;
   }
 
   return true;
 };
 
-const repoName = process.args[2];
-const gitCommand = `git clone --depth 1 https://github.com/susegroj/react-starter-pack ${repoName}`;
+const changeAppNames = async () => {
 
-const installDepsCommand = `cd ${repoName} && yarn install`;
+  console.log(`\n 🗂 Preparing the files...`);
 
-console.log(`⏱ Cloning the repository ${repoName}...`);
+  const PACKAGE_JSON = `${PROJECT_NAME}/package.json`;
+  const EN_LABELS = `${PROJECT_NAME}/src/assets/i18n/en.json`;
+  const ESP_LABELS = `${PROJECT_NAME}/src/assets/i18n/esp.json`;
+  const MANIFEST = `${PROJECT_NAME}/public/manifest.json`;
+  
+  /* == JSON == */
+  const pack = fs.readFileSync(PACKAGE_JSON, 'utf-8');
+  const packJson = JSON.parse(pack);
 
-const checkedOut = runCommand(gitCommand);
+  packJson.name = PROJECT_NAME;
+  packJson.description = PROJECT_DESCRIPTION;
+  packJson.version = '0.0.1';
+  packJson.repository = {};
 
-if (!checkedOut) {
-  console.log('✖ Failed to clone the repository 🥺');
-  process.exit(-1);
-}
+  fs.writeFileSync(PACKAGE_JSON, JSON.stringify(packJson), 'utf-8');  
 
-console.log('✔ Cloned the repository 🎉');
-console.log(`🚧 Installing dependencies for ${repoName}`);
+  /* == LANGUAGES == */
+  const enLng = fs.readFileSync(EN_LABELS, 'utf-8');
+  const espLng = fs.readFileSync(ESP_LABELS, 'utf-8');
 
-const installDeps = runCommand(installDepsCommand);
+  const enLngJson = JSON.parse(enLng);
+  const espLngJson = JSON.parse(espLng);
 
-if (!installDeps) {
-  console.log('✖ Failed to install dependencies 🥺');
-  process.exit(-1);
-}
+  enLngJson.app.name = APP_NAME;
+  espLngJson.app.name = APP_NAME;
 
-console.log(`✅ Successfully cloned and installed ${repoName} 🤓`);
+  fs.writeFileSync(EN_LABELS, JSON.stringify(enLngJson), 'utf-8');
+  fs.writeFileSync(ESP_LABELS, JSON.stringify(espLngJson), 'utf-8'); 
 
-console.log(`cd ${repoName} && yarn development`);
+  /* == MANIFEST PWA == */
+  const manifest = fs.readFileSync(MANIFEST, 'utf-8');
+  const manifestJson = JSON.parse(manifest);
 
-console.log('🚀 Done! 🚀');
+  manifestJson.short_name = APP_NAME;
+  manifestJson.name = APP_NAME;
+
+  fs.writeFileSync(MANIFEST, JSON.stringify(manifestJson), 'utf-8'); 
+  
+  console.log(`\n 🗂 Files prepared 🎉`);
+};
+
+const cloneRepository = async () => {
+  const gitCommand = `git clone --depth 1 git@github.com:susegroj/react-starter-pack.git ${PROJECT_NAME}`;
+
+    console.log(`\n ⌛️ Cloning the repository ${PROJECT_NAME}...`);
+
+    const checkedOut = await runCommand(gitCommand);
+
+    if (!checkedOut) {
+      console.log('\n ❌ Failed to clone the repository 🥺 \n');
+      process.exit(-1);
+    }
+
+    console.log('\n ✅ Cloned the repository 🎉');
+    return true;
+};
+
+const createReadme = async () => {
+
+  console.log(`\n 📝 Creating README...`);
+
+  const createReadMeCommand = `cd ${PROJECT_NAME} && rm README.md && npx readme-md-generator -p ${PROJECT_NAME}/bin/template.md -y`;
+
+  const createdReadMe = await runCommand(createReadMeCommand);
+
+  if(!createdReadMe) {
+    console.log('\n ❌ Failed to create README.md 🥺 \n');
+    process.exit(-1);
+  }
+  return true;
+};
+
+const installDependencies = async () => {
+  console.log(`\n 🚧 Installing dependencies...`);
+
+  const installDependenciesCommand = `cd ${PROJECT_NAME} && yarn install`;
+  const installDeps = await runCommand(installDependenciesCommand);
+
+  if (!installDeps) {
+    console.log('\n ❌ Failed to install dependencies 🥺');
+    process.exit(-1);
+  }
+
+  console.log(`\n ✅ Successfully cloned and installed ${PROJECT_NAME} 🤓`);
+
+};
+
+const showEndMessage = () => process.stdout.write(boxen(END_MSG, BOXEN_CONFIG));
+
+const initializeProject = () => {
+  try {
+    rl.question('-> 📝 Project name (e.i my-project): ', (projectName) => {
+      if(!projectName) {
+        console.log('-> 🚫 Project name is required');
+        return initializeProject();
+      }
+      PROJECT_NAME = projectName;
+
+      rl.question(`-> 📝 Project description (default: ${PROJECT_DESCRIPTION}): `, async (projectDescription = PROJECT_DESCRIPTION) => {
+        PROJECT_DESCRIPTION = projectDescription || PROJECT_DESCRIPTION;
+
+        rl.question(`-> 📝 App name (default: ${PROJECT_NAME}): `, async (appName = PROJECT_NAME) => {
+          APP_NAME = appName || PROJECT_NAME;
+          
+            await cloneRepository();
+            await changeAppNames();
+            await createReadme();
+            await installDependencies();
+            await showEndMessage();
+    
+            process.exit(0);
+        });
+
+      });
+
+      return true;
+    });
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+  return true;
+};
+
+rl.on("close", () => {
+  const cleanExitCommand = `rm -rf ${PROJECT_NAME}`;
+  
+  const cleaned = runCommand(cleanExitCommand);
+
+  console.log("\n 🧹 Cleaning installation before exit...");
+
+    if(!cleaned) {
+      console.log('\n ❌ Failed to clean the installation 🥺 \n');
+      process.exit(-1);
+    }
+
+    console.log('\n 🤟 See you next time... \n'); 
+    process.exit(-1);
+});
+
+
+// Run the app
+initializeProject();
