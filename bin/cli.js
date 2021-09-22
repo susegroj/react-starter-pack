@@ -138,16 +138,25 @@ const installDependencies =  () => {
 
 };
 
-const removeBinFolder = () => {
+const cleaningFolders = () => {
   console.log(`\n 🗂 Preparing last details...\n`);
 
-  const removeCommand = `cd ${PROJECT_NAME} && rm -rf bin/`;
+  const removeCommand = `cd ${PROJECT_NAME} && rm -rf bin/ && rm -rf .git`;
   const removed = runCommand(removeCommand);
 
   if (!removed) {
     console.log('\n ❌ Failed to set last details 🥺 \n');
     process.exit(-1);
   }
+
+  const initGit = `cd ${PROJECT_NAME} && git init`;
+  const initGitCommand = runCommand(initGit);
+
+  if (!initGitCommand) {
+    console.log('\n ❌ Failed to set last details 🥺 \n');
+    process.exit(-1);
+  }
+  
   return true;
 };
 
@@ -172,7 +181,7 @@ const initializeProject = () => {
             changeAppNames();
             createReadme();
             installDependencies();
-            removeBinFolder();
+            cleaningFolders();
             showEndMessage();
     
             process.exit(0);
