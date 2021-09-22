@@ -96,11 +96,110 @@ a {
 
 }
 
+.btn {
+  align-items: center;
+  background: rgba(var(--primary));
+  border: 1px solid transparent;
+
+  border-radius: 0.25rem;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  color: rgba(var(--primary-text));
+  cursor: pointer;
+
+  display: flex;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  gap: 0.25rem;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.5rem 1rem;
+
+  position: relative;
+  transition: box-shadow 0.2s;
+
+  &.secondary {
+    background: rgba(var(--primary-text));
+    border: 1px solid rgba(var(--primary));
+    color: rgba(var(--primary));
+    
+    &::after {
+      background: rgba(var(--primary));
+    }
+  }
+
+  &::before {
+    background-color: rgb(var(--primary-text, 255, 255, 255));
+    bottom: 0;
+    content: '';
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity 0.2s;
+  }
+
+  &::after {
+    background-color: rgb(var(--primary-text, 255, 255, 255));
+    border-radius: 50%;
+    content: '';
+    height: 32px; /* Safari */
+    left: 50%;
+    opacity: 0;
+    padding: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    transition: opacity 1s, transform 0.5s;
+    width: 32px; /* Safari */
+  }
+
+  &:hover {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+    
+    &::before {
+      opacity: 0.08;
+    } 
+  }
+  
+  &:active {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+    &::after {
+      opacity: 0.32;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0s;
+    }
+  }
+  
+  &:disabled {
+    background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.12);
+    border: 1px solid transparent;
+    box-shadow: none;
+    color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+    cursor: not-allowed;
+
+    &.secondary {
+      background: none;
+      border: 1px solid rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.12);
+      color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.12);
+    }
+    
+    &::before,
+    &::after {
+      opacity: 0;
+    }
+  }
+}
+
 .link-btn {
   background: rgba(var(--black));
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   color: var(--white);
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 1rem;
   text-decoration: none;
   
   @include hover {
@@ -112,10 +211,6 @@ a {
   
 }
 
-.disabled {
-  cursor: not-allowed;
-  opacity: 0.2;
-}
 
 .skeleton {
   @include animation(skeleton, 1s, linear, infinite);

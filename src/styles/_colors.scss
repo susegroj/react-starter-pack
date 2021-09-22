@@ -1,11 +1,15 @@
 $white: #fffffe;
 $black: 14, 23, 44;
 $blue: #4169e1;
-
+$primary: 33, 150, 243;
+$primary-text: 255, 255, 255;
 
 :root {
   --white: #{$white};
   --black: #{$black};
   --blue: #{$blue};
+
+  --primary: #{$primary};
+  --primary-text: #{$primary_text};
 }
 

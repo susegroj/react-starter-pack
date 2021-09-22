@@ -34,6 +34,22 @@ const Home = () => {
           <a href="#">Normal link</a>
         </section>
 
+        <section className="links">
+          <p>Custom Links</p>
+          <button className="btn" type="button">
+            Link btn
+          </button>
+          <button className="btn secondary" type="button">
+            Link btn
+          </button>
+          <button disabled className="btn" type="button">
+            Link btn
+          </button>
+          <button disabled className="btn secondary" type="button">
+            Link btn
+          </button>
+        </section>
+
         <section className="loaders">
           <p>Custom Loaders</p>
           <Loader size="s" />
