@@ -1,6 +1,6 @@
 {
   "name": "@susegroj/react-starter-pack",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "MIT",
   "description": "A complete ReactJs architecture to start fast a project without many configurations.",
   "keywords": [
@@ -39,6 +39,7 @@
     "postinstall": "npx husky install"
   },
   "dependencies": {
+    "boxen": "^5.1.2",
     "i18next": "^20.3.0",
     "prop-types": "15.7.2",
     "react": "17.0.2",
@@ -60,7 +61,6 @@
     "@svgr/webpack": "^5.5.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
-    "boxen": "^5.1.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.2",
